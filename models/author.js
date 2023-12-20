@@ -27,5 +27,8 @@ AuthorSchema.virtual("url").get(function () {
     return `/catalog/author/${this._id}`;
 });
 
+//lifespan
+
 // Export model
 module.exports = mongoose.model("Author", AuthorSchema);
+
