@@ -28,6 +28,22 @@ AuthorSchema.virtual("url").get(function () {
 });
 
 //lifespan
+AuthorSchema.virtual("lifespan").get(function () {
+    let lifespan = "";
+    if (this.date_of_birth && this.date_of_death) {
+        const birth = this.date_of_birth.getFullYear();
+        const death = this.date_of_death.getFullYear();
+        const age = death - birth;
+        lifespan = `${birth} - ${death} (${age} years)`;
+    } else if (this.date_of_birth) {
+        const birth = this.date_of_birth.getFullYear();
+        const currentYear = new Date().getFullYear();
+        const age = currentYear - birth;
+        lifespan = `${birth} - Present (${age} years)`;
+    }
+    return lifespan;
+});
+
 
 // Export model
 module.exports = mongoose.model("Author", AuthorSchema);
